@@ -20,7 +20,12 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-      - node server_tracker.js
-      - git add known_servers.json
-      - git commit -m 'changes'
-      - git push
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.x'
+      - run: node server_tracker.js
+      - run: git add known_servers.json
+      - run: git commit -m 'changes'
+      - run: git push
