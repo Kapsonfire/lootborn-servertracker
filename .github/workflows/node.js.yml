@@ -13,13 +13,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Use secrets
-        env:
-           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
       - uses: actions/checkout@v4
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '24.x'
       - run: node server_tracker.js
+        env:
+           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
       - uses: stefanzweifel/git-auto-commit-action@v5
