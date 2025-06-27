@@ -13,6 +13,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Use secrets
+        env:
+           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
       - uses: actions/checkout@v4
       - name: Use Node.js
         uses: actions/setup-node@v4
