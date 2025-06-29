@@ -1,0 +1,24 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Node.js Check for Servers
+
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: 5,10,15,20,25,30,35,40,45,50,55,0 * * * *   #github does not support */5
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.x'
+      - run: node server_tracker.js
+        env:
+           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      - uses: stefanzweifel/git-auto-commit-action@v5
