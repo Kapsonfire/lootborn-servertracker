@@ -56,6 +56,8 @@ const newServers = serverList.filter(server => {
                     })
                 }
         }
+
+        fs.writeFileSync('./known_servers.json', JSON.stringify(serverList, null, 2), 'utf-8');
     }
 })();
 //save to known_servers.json
