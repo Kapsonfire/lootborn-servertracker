@@ -36,7 +36,8 @@ const newServers = serverList.filter(server => {
 
     if (newServers.length > 0) {
         for(const server of newServers) {
-                const msg = `New server created: ${server.NAME} (ID: ${server.ID}) started at ${server.START_TIME}`;
+                const start = new Date(server.START_TIME+"+08:00"); // china timezone
+                const msg = `New server created: ${server.NAME} (ID: ${server.ID}) started at <t:${Math.floor(start.getTime()/1000)}:f>`;
                 console.log(msg);
 
 
@@ -55,9 +56,6 @@ const newServers = serverList.filter(server => {
                     })
                 }
         }
-
-
-        fs.writeFileSync('./known_servers.json', JSON.stringify(serverList, null, 2), 'utf-8');
     }
 })();
 //save to known_servers.json
